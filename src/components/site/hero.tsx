@@ -7,8 +7,10 @@ import { HeroAmbient } from "./hero-ambient";
 import { Nav } from "./nav";
 
 const NAV = [
-  { href: "#work", label: "Work" },
+  { href: "#selected-work", label: "Selected Work" },
+  { href: "#design-principles", label: "Design Principles" },
   { href: "#about", label: "About" },
+  { href: "#beyond-the-screen", label: "Beyond the Screen" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -84,8 +86,8 @@ export function Hero() {
               className="mt-12 flex flex-wrap items-center gap-6"
             >
               <Action href={profile.cta.href}>{profile.cta.label}</Action>
-              <a href="#work" className="text-link text-sm text-muted-foreground">
-                Selected work
+              <a href="#selected-work" className="text-link text-sm text-muted-foreground">
+                [Selected Work Link]
               </a>
             </motion.div>
           </div>
@@ -95,8 +97,7 @@ export function Hero() {
             className="flex flex-wrap items-center justify-between gap-6 hairline-top pt-7 text-xs uppercase tracking-[0.2em] text-muted-foreground"
           >
             <span>{profile.location}</span>
-            <span>Two engagements open for 2026</span>
-
+            <span>{profile.availability}</span>
           </motion.div>
         </motion.div>
       </Container>

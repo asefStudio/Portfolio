@@ -52,13 +52,9 @@ export function ProjectExhibit({
       <a
         href={project.href ?? "#contact"}
         className="block focus-visible:outline-none"
-        aria-label={`${project.title} — view case study`}
+        aria-label={`${project.title} — ${project.ctaLabel}`}
       >
-        <div
-          ref={ref}
-          onPointerMove={onMove}
-          className={cn("exhibit-plate", layout.ratio)}
-        >
+        <div ref={ref} onPointerMove={onMove} className={cn("exhibit-plate", layout.ratio)}>
           <RevealImage
             src={project.image}
             alt={`${project.title} — ${project.summary}`}
@@ -78,9 +74,7 @@ export function ProjectExhibit({
           )}
         >
           <div className="flex items-center gap-4 text-[0.7rem] uppercase tracking-[0.28em] text-muted-foreground">
-            <span className="tabular-nums text-primary">
-              {String(index + 1).padStart(2, "0")}
-            </span>
+            <span className="tabular-nums text-primary">{String(index + 1).padStart(2, "0")}</span>
             <span className="h-px w-6 bg-hairline" />
             <span>{project.year}</span>
             <span className="h-px w-6 bg-hairline" />
@@ -101,12 +95,7 @@ export function ProjectExhibit({
               {project.summary}
             </p>
 
-            <ul
-              className={cn(
-                "flex flex-wrap gap-2",
-                layout.align === "end" && "lg:justify-end",
-              )}
-            >
+            <ul className={cn("flex flex-wrap gap-2", layout.align === "end" && "lg:justify-end")}>
               {project.tags.map((tag, i) => (
                 <li
                   key={tag}
@@ -119,7 +108,7 @@ export function ProjectExhibit({
             </ul>
 
             <span className="exhibit-cta inline-flex items-center gap-2 text-sm font-medium">
-              <span className="exhibit-cta-label">View case study</span>
+              <span className="exhibit-cta-label">{project.ctaLabel}</span>
               <ArrowUpRight className="action-arrow size-4" aria-hidden="true" />
             </span>
           </div>

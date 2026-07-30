@@ -1,4 +1,4 @@
-import { profile, projects, approach, skills } from "@/content/site";
+import { profile, projects, designPrinciples, beyondTheScreen } from "@/content/site";
 import { Section } from "./layout";
 import { Reveal, SectionHeader, Divider } from "./reveal";
 import { ProjectExhibit } from "./project-gallery";
@@ -6,13 +6,13 @@ import { Action } from "./action";
 
 const revealVariants = ["soft", "calm", "swift", "default"] as const;
 
-export function Work() {
+export function SelectedWork() {
   return (
-    <Section id="work">
+    <Section id="selected-work">
       <SectionHeader
-        label="Selected work"
-        title="Four things I'd show you in person."
-        description="Long engagements where the design decided how the product actually behaves — not how it looks in a deck."
+        label="[Selected Work Eyebrow]"
+        title="[Selected Work Heading]"
+        description="[Selected Work Intro]"
       />
 
       <div className="mt-20 grid grid-cols-1 gap-y-24 sm:mt-28 sm:gap-y-32 lg:grid-cols-12 lg:gap-x-10">
@@ -39,12 +39,11 @@ export function Work() {
   );
 }
 
-
 export function About() {
   return (
     <Section id="about">
       <div className="grid gap-14 lg:grid-cols-[0.85fr_1fr] lg:gap-24">
-        <SectionHeader label="The short version" title="Clarity is the whole job." variant="soft" />
+        <SectionHeader label="[About Eyebrow]" title="[About Heading]" variant="soft" />
         <div>
           <Reveal variant="calm" delay={0.08}>
             <div className="space-y-6 text-base leading-relaxed text-muted-foreground sm:text-lg">
@@ -73,16 +72,16 @@ export function About() {
   );
 }
 
-export function Approach() {
+export function DesignPrinciples() {
   return (
-    <Section id="approach">
+    <Section id="design-principles">
       <SectionHeader
-        label="How I work"
-        title="Four rules I don't negotiate."
-        description="They hold whether the engagement is six weeks or two years."
+        label="[Design Principles Eyebrow]"
+        title="[Design Principles Heading]"
+        description="[Design Principles Intro]"
       />
       <div className="mt-16 grid gap-px overflow-hidden rounded-3xl border border-border bg-border sm:mt-24 sm:grid-cols-2">
-        {approach.map((item, i) => (
+        {designPrinciples.map((item, i) => (
           <Reveal key={item.index} variant="calm" delay={i * 0.09}>
             <div className="approach-tile group h-full bg-background p-9 sm:p-12">
               <span className="font-display text-sm tabular-nums text-primary">{item.index}</span>
@@ -96,19 +95,30 @@ export function Approach() {
           </Reveal>
         ))}
       </div>
+    </Section>
+  );
+}
+
+export function BeyondTheScreen() {
+  return (
+    <Section id="beyond-the-screen">
+      <SectionHeader
+        label="[Beyond the Screen Eyebrow]"
+        title="[Beyond the Screen Heading]"
+        description="[Beyond the Screen Intro]"
+      />
       <Reveal variant="swift" delay={0.14}>
         <ul className="mt-14 flex flex-wrap gap-3">
-          {skills.map((skill) => (
+          {beyondTheScreen.map((item) => (
             <li
-              key={skill}
+              key={item}
               className="chip rounded-full border border-border px-4 py-2 text-sm text-muted-foreground"
             >
-              {skill}
+              {item}
             </li>
           ))}
         </ul>
       </Reveal>
-
     </Section>
   );
 }
@@ -118,17 +128,15 @@ export function Contact() {
     <Section id="contact" className="relative overflow-hidden">
       <div className="glow-field pointer-events-none absolute inset-x-0 bottom-0 h-[30rem] rotate-180" />
       <div className="relative max-w-3xl">
-        <SectionHeader label="Say hello" title="Tell me where it's stuck." variant="soft" />
+        <SectionHeader label="[Contact Eyebrow]" title="[Contact Heading]" variant="soft" />
         <Reveal variant="calm" delay={0.14}>
           <p className="mt-6 max-w-xl text-base leading-[1.75] text-muted-foreground sm:text-lg">
-            I take on a small number of projects each year, usually because the problem is
-            interesting rather than because the timing is. One honest paragraph is enough to start.
+            [Contact Description]
           </p>
           <div className="mt-12">
             <Action href={`mailto:${profile.email}`}>{profile.email}</Action>
           </div>
         </Reveal>
-
       </div>
     </Section>
   );
@@ -145,12 +153,7 @@ export function Footer() {
         <ul className="flex flex-wrap gap-6">
           {profile.socials.map((social) => (
             <li key={social.label}>
-              <a
-                href={social.href}
-                target="_blank"
-                rel="noreferrer"
-                className="text-link"
-              >
+              <a href={social.href} target="_blank" rel="noreferrer" className="text-link">
                 {social.label}
               </a>
             </li>

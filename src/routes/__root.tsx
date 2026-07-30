@@ -77,18 +77,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Elin Marchetti — Product & Interface Designer" },
+      { title: "[Portfolio Name] — [Portfolio Discipline]" },
       {
         name: "description",
-        content:
-          "Portfolio of Elin Marchetti, a product and interface designer crafting calm, precise software experiences.",
+        content: "[Portfolio Description]",
       },
-      { name: "author", content: "Elin Marchetti" },
-      { property: "og:title", content: "Elin Marchetti — Product & Interface Designer" },
+      { name: "author", content: "[Portfolio Name]" },
+      { property: "og:title", content: "[Portfolio Name] — [Portfolio Discipline]" },
       {
         property: "og:description",
-        content:
-          "Portfolio of Elin Marchetti, a product and interface designer crafting calm, precise software experiences.",
+        content: "[Portfolio Description]",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

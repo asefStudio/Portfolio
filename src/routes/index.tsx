@@ -3,11 +3,17 @@ import { Hero } from "@/components/site/hero";
 import { CursorLight } from "@/components/site/cursor-light";
 import { PageAmbient } from "@/components/site/page-ambient";
 import { SmoothScroll } from "@/components/site/smooth-scroll";
-import { Work, About, Approach, Contact, Footer } from "@/components/site/sections";
+import {
+  SelectedWork,
+  DesignPrinciples,
+  About,
+  BeyondTheScreen,
+  Contact,
+  Footer,
+} from "@/components/site/sections";
 
-const title = "Elin Marchetti — Product & Interface Designer";
-const description =
-  "Portfolio of Elin Marchetti, a product and interface designer turning complex software into calm, precise experiences.";
+const title = "[Portfolio Name] — [Portfolio Discipline]";
+const description = "[Portfolio Description]";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -30,9 +36,10 @@ function Index() {
       <PageAmbient />
       <CursorLight />
       <Hero />
-      <Work />
+      <SelectedWork />
+      <DesignPrinciples />
       <About />
-      <Approach />
+      <BeyondTheScreen />
       <Contact />
       <Footer />
     </main>
