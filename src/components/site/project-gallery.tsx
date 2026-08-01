@@ -27,15 +27,7 @@ const layouts: Layout[] = [
   { ratio: "aspect-[3/2]", lead: "lg:mt-10", align: "start" },
 ];
 
-export function ProjectExhibit({
-  project,
-  index,
-  total,
-}: {
-  project: Project;
-  index: number;
-  total: number;
-}) {
+export function ProjectExhibit({ project, index }: { project: Project; index: number }) {
   const layout = layouts[index % layouts.length];
   const ref = useRef<HTMLDivElement>(null);
 
@@ -47,75 +39,87 @@ export function ProjectExhibit({
     el.style.setProperty("--py", `${((event.clientY - rect.top) / rect.height) * 100}%`);
   };
 
-  return (
-    <article className={cn("exhibit group", layout.lead)}>
-      <a
-        href={project.href ?? "#contact"}
-        className="block focus-visible:outline-none"
-        aria-label={`${project.title} — ${project.ctaLabel}`}
+  const projectContent = (
+    <>
+      <div ref={ref} onPointerMove={onMove} className={cn("exhibit-plate", layout.ratio)}>
+        <RevealImage
+          src={project.image}
+          alt={`${project.title} — ${project.summary}`}
+          width={1600}
+          height={1200}
+          loading={layout.eager ? "eager" : "lazy"}
+          className="size-full"
+          hoverScale="1.045"
+        />
+        <span aria-hidden="true" className="exhibit-light" />
+      </div>
+
+      <div
+        className={cn(
+          "mt-7 flex flex-col gap-4 sm:mt-9",
+          layout.align === "end" && "lg:items-end lg:text-right",
+        )}
       >
-        <div ref={ref} onPointerMove={onMove} className={cn("exhibit-plate", layout.ratio)}>
-          <RevealImage
-            src={project.image}
-            alt={`${project.title} — ${project.summary}`}
-            width={1600}
-            height={1200}
-            loading={layout.eager ? "eager" : "lazy"}
-            className="size-full"
-            hoverScale="1.045"
-          />
-          <span aria-hidden="true" className="exhibit-light" />
+        <div className="flex items-center gap-4 text-[0.7rem] uppercase tracking-[0.28em] text-muted-foreground">
+          <span className="tabular-nums text-primary">{String(index + 1).padStart(2, "0")}</span>
+          <span className="h-px w-6 bg-hairline" />
+          <span>{project.year}</span>
+          <span className="h-px w-6 bg-hairline" />
+          <span>{project.role}</span>
         </div>
+
+        <h3 className="exhibit-title font-display text-3xl leading-none sm:text-4xl lg:text-5xl">
+          {project.title}
+        </h3>
 
         <div
           className={cn(
-            "mt-7 flex flex-col gap-4 sm:mt-9",
-            layout.align === "end" && "lg:items-end lg:text-right",
+            "exhibit-reveal flex flex-col gap-5",
+            layout.align === "end" && "lg:items-end",
           )}
         >
-          <div className="flex items-center gap-4 text-[0.7rem] uppercase tracking-[0.28em] text-muted-foreground">
-            <span className="tabular-nums text-primary">{String(index + 1).padStart(2, "0")}</span>
-            <span className="h-px w-6 bg-hairline" />
-            <span>{project.year}</span>
-            <span className="h-px w-6 bg-hairline" />
-            <span>{project.role}</span>
-          </div>
+          <p className="max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base">
+            {project.summary}
+          </p>
 
-          <h3 className="exhibit-title font-display text-3xl leading-none sm:text-4xl lg:text-5xl">
-            {project.title}
-          </h3>
+          <ul className={cn("flex flex-wrap gap-2", layout.align === "end" && "lg:justify-end")}>
+            {project.tags.map((tag, i) => (
+              <li
+                key={tag}
+                className="exhibit-tag rounded-full border border-border px-3 py-1 text-xs tracking-wide text-muted-foreground"
+                style={{ ["--i" as string]: i }}
+              >
+                {tag}
+              </li>
+            ))}
+          </ul>
 
-          <div
-            className={cn(
-              "exhibit-reveal flex flex-col gap-5",
-              layout.align === "end" && "lg:items-end",
-            )}
-          >
-            <p className="max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base">
-              {project.summary}
-            </p>
-
-            <ul className={cn("flex flex-wrap gap-2", layout.align === "end" && "lg:justify-end")}>
-              {project.tags.map((tag, i) => (
-                <li
-                  key={tag}
-                  className="exhibit-tag rounded-full border border-border px-3 py-1 text-xs tracking-wide text-muted-foreground"
-                  style={{ ["--i" as string]: i }}
-                >
-                  {tag}
-                </li>
-              ))}
-            </ul>
-
-            <span className="exhibit-cta inline-flex items-center gap-2 text-sm font-medium">
-              <span className="exhibit-cta-label">{project.ctaLabel}</span>
+          <span className="exhibit-cta inline-flex items-center gap-2 text-sm font-medium">
+            <span className="exhibit-cta-label">{project.ctaLabel}</span>
+            {project.href ? (
               <ArrowUpRight className="action-arrow size-4" aria-hidden="true" />
-            </span>
-          </div>
+            ) : null}
+          </span>
         </div>
-      </a>
+      </div>
+    </>
+  );
 
-      <span className="sr-only">{`Project ${index + 1} of ${total}`}</span>
+  return (
+    <article className={cn("exhibit group", layout.lead)}>
+      {project.href ? (
+        <a
+          href={project.href}
+          className="block focus-visible:outline-none"
+          aria-label={project.ariaLabel}
+        >
+          {projectContent}
+        </a>
+      ) : (
+        <div>{projectContent}</div>
+      )}
+
+      <span className="sr-only">{project.positionLabel}</span>
     </article>
   );
 }

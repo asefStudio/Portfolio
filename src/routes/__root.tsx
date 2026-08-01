@@ -10,6 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import { metadata } from "../content/site";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -77,16 +78,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "[Portfolio Name] — [Portfolio Discipline]" },
+      { title: metadata.title },
       {
         name: "description",
-        content: "[Portfolio Description]",
+        content: metadata.description,
       },
-      { name: "author", content: "[Portfolio Name]" },
-      { property: "og:title", content: "[Portfolio Name] — [Portfolio Discipline]" },
+      { name: "author", content: metadata.author },
+      { property: "og:title", content: metadata.title },
       {
         property: "og:description",
-        content: "[Portfolio Description]",
+        content: metadata.description,
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

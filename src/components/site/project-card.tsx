@@ -44,7 +44,10 @@ function DepthCard({
       ref={ref}
       onPointerMove={onMove}
       onPointerLeave={onLeave}
-      className={cn("depth-card group relative overflow-hidden rounded-3xl border border-border", className)}
+      className={cn(
+        "depth-card group relative overflow-hidden rounded-3xl border border-border",
+        className,
+      )}
     >
       <span aria-hidden="true" className="depth-card-light" />
       {children}
@@ -85,13 +88,11 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
         <div className="relative flex flex-col justify-between gap-10 p-8 sm:p-10 lg:p-12">
           <div>
             <div className="flex items-center gap-3 text-xs uppercase tracking-[0.24em] text-primary">
-              <span>Featured</span>
+              <span>{project.featuredLabel}</span>
               <span className="h-px w-8 bg-primary/50" />
               <span className="text-muted-foreground">{project.year}</span>
             </div>
-            <h3 className="mt-6 font-display text-4xl leading-none sm:text-5xl">
-              {project.title}
-            </h3>
+            <h3 className="mt-6 font-display text-4xl leading-none sm:text-5xl">{project.title}</h3>
             <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground">
               {project.summary}
             </p>
@@ -101,11 +102,8 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
             <div className="flex items-center justify-between hairline-top pt-6 text-sm">
               <span className="text-muted-foreground">{project.role}</span>
               <span className="link-underline inline-flex items-center gap-1.5 font-medium">
-                View case study
-                <ArrowUpRight
-                  className="action-arrow size-4"
-                  aria-hidden="true"
-                />
+                {project.ctaLabel}
+                <ArrowUpRight className="action-arrow size-4" aria-hidden="true" />
               </span>
             </div>
           </div>
@@ -115,13 +113,7 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
   );
 }
 
-export function ProjectCard({
-  project,
-  className,
-}: {
-  project: Project;
-  className?: string;
-}) {
+export function ProjectCard({ project, className }: { project: Project; className?: string }) {
   return (
     <DepthCard className={cn("flex flex-col", className)}>
       <div className="aspect-[4/3] overflow-hidden">

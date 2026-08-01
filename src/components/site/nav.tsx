@@ -31,7 +31,7 @@ export function Nav({
     <div
       ref={listRef}
       onPointerLeave={() => setVisible(false)}
-      className={cn("relative hidden items-center gap-9 sm:flex", className)}
+      className={cn("relative hidden items-center gap-4 md:flex lg:gap-7 xl:gap-9", className)}
     >
       {items.map((item) => (
         <a
@@ -52,9 +52,7 @@ export function Nav({
           initial={false}
           animate={{ x: indicator.x, width: indicator.w, opacity: visible ? 1 : 0 }}
           transition={
-            reduced
-              ? { duration: 0 }
-              : { type: "tween", duration: 0.55, ease: [0.22, 1, 0.36, 1] }
+            reduced ? { duration: 0 } : { type: "tween", duration: 0.55, ease: [0.22, 1, 0.36, 1] }
           }
         />
       ) : null}

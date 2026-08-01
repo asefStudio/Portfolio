@@ -65,18 +65,24 @@ export function SectionHeader({
   className,
   variant = "calm",
 }: {
-  label: string;
-  title: string;
+  label?: string;
+  title?: string;
   description?: string;
   className?: string;
   variant?: RevealVariant;
 }) {
+  if (!label && !title && !description) return null;
+
   return (
     <Reveal variant={variant} className={cn("max-w-2xl", className)}>
-      <p className="text-xs font-medium uppercase tracking-[0.28em] text-primary">{label}</p>
-      <h2 className="mt-5 font-display text-4xl leading-[1.05] text-balance-tight sm:text-5xl lg:text-6xl">
-        {title}
-      </h2>
+      {label ? (
+        <p className="text-xs font-medium uppercase tracking-[0.28em] text-primary">{label}</p>
+      ) : null}
+      {title ? (
+        <h2 className="mt-5 font-display text-4xl leading-[1.05] text-balance-tight sm:text-5xl lg:text-6xl">
+          {title}
+        </h2>
+      ) : null}
       {description ? (
         <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
           {description}

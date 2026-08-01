@@ -3,6 +3,7 @@ import { Hero } from "@/components/site/hero";
 import { CursorLight } from "@/components/site/cursor-light";
 import { PageAmbient } from "@/components/site/page-ambient";
 import { SmoothScroll } from "@/components/site/smooth-scroll";
+import { metadata } from "@/content/site";
 import {
   SelectedWork,
   DesignPrinciples,
@@ -12,16 +13,13 @@ import {
   Footer,
 } from "@/components/site/sections";
 
-const title = "[Portfolio Name] — [Portfolio Discipline]";
-const description = "[Portfolio Description]";
-
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title },
-      { name: "description", content: description },
-      { property: "og:title", content: title },
-      { property: "og:description", content: description },
+      { title: metadata.title },
+      { name: "description", content: metadata.description },
+      { property: "og:title", content: metadata.title },
+      { property: "og:description", content: metadata.description },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
